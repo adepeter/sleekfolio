@@ -63,7 +63,7 @@ ROOT_URLCONF = 'sleekfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,9 +138,7 @@ STATICFILES_DIRS = [
 # Media files (User uploaded files)
 # https://docs.djangoproject.com/en/3.0/howto/media-files/
 MEDIA_URL = '/media/'
-MEDIA_ROOT = [
-    os.path.join(BASE_DIR, 'media')
-]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Custom User Model
 # AUTH_USER_MODEL = 'users.User'

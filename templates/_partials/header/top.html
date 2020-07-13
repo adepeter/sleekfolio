@@ -1,0 +1,35 @@
+<div id="header-wrap">
+
+    <div class="container clearfix">
+
+        <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+        <!-- Logo
+        ============================================= -->
+        {% include '_partials/header/top/logo.html' %}
+        <!-- #logo end -->
+
+        <!-- Primary Navigation
+        ============================================= -->
+        <nav id="primary-menu">
+
+            {% include '_partials/header/top/nav.html' %}
+
+{#            {% if request.user.is_authenticated %}#}
+{#            <!-- Top Cart#}
+{#            ============================================= -->#}
+{#            <div id="top-cart">#}
+{#                {% include 'loader/header/top/cart.html' %}#}
+{#            </div><!-- #top-cart end -->#}
+{#            {% endif %}#}
+
+            <!-- Top Search
+            ============================================= -->
+            {% include '_partials/header/top/search.html' %}
+            <!-- #top-search end -->
+
+        </nav><!-- #primary-menu end -->
+
+    </div>
+
+</div>

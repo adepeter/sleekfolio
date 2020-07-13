@@ -1,5 +1,8 @@
-from django.contrib.postgres.fields import ArrayField
+import os
+
+from django.contrib.postgres.fields import ArrayField, HStoreField
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -9,17 +12,25 @@ from .. import constants
 
 choicify_stacks = Choicify(constants.STACK_CHOICES)
 
+def upload_preview_to(instance, filename):
+    now = timezone.now()
+    category_slug = instance.category.slug
+    project_slug = instance.slug
+    base, ext = os.path.splitext(filename)
+    return f"projects/{category_slug}/{project_slug}/{now:%Y%m%d%H%M%S}{ext.lower()}"
+
 
 class Project(models.Model):
     category = models.ForeignKey(
         'categories.Category',
         verbose_name=_('category'),
         on_delete=models.CASCADE,
+        related_name='projects',
         help_text=_('Type of category project belongs to')
     )
     preview = models.ImageField(
         verbose_name=_('preview'),
-        upload_to='images',
+        upload_to=upload_preview_to,
         blank=True,
         null=True,
         help_text=_('Preview image for project')
@@ -52,6 +63,12 @@ class Project(models.Model):
         null=True,
         help_text=_('Technologies with which project was built')
     )
+    built_with = HStoreField(
+        verbose_name=_('built with'),
+        blank=True,
+        null=True,
+        help_text=_('Tools or languages that were employed to build the project')
+    )
     is_completed = models.BooleanField(
         verbose_name=_('project completion status'),
         default=False,
@@ -59,7 +76,7 @@ class Project(models.Model):
     )
     demo_url = models.URLField(
         verbose_name=_('demo link'),
-        default='https://',
+        default='https://demo-link.com/',
         blank=True,
         help_text=_('Link to preview project')
     )
@@ -78,6 +95,17 @@ class Project(models.Model):
         default=timezone.now,
         help_text=_('Date project was completed')
     )
+
+    def get_absolute_url(self):
+        kwargs = {
+            'category_slug': self.category.slug,
+            'id': self.id,
+            'slug': self.slug
+        }
+        return reverse('sleekfolio:projects:project_detail', kwargs=kwargs)
+
+    def __str__(self):
+        return f'{self.title} - {self.category}'
 
     class Meta:
         constraints = [

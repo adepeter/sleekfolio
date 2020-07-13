@@ -1,0 +1,15 @@
+<ul class="skills">
+    {% for technology, percentage in technologies.items %}
+        <li data-percent="{{ percentage }}">
+            <span>{{ technology }}</span>
+            <div class="progress">
+                <div class="progress-percent">
+                    <div class="counter counter-inherit counter-instant"><span data-from="0" data-to="{{ percentage }}"
+                                                                               data-refresh-interval="30"
+                                                                               data-speed="1000"></span>%
+                    </div>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>

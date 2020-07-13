@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Homepage | {{ block.super }}{% endblock %}
+
+
+{% block misc_nav %}
+    <div class="promo promo-full promo-border header-stick bottommargin-lg">
+        <div class="container clearfix">
+            <h3>Call us today at <span>+91.22.57412541</span> or Email us at <span>support@canvas.com</span>
+            </h3>
+            <span>We strive to provide Our Customers with Top Notch Support to make their Theme Experience Wonderful</span>
+            <a href="#" class="button button-reveal button-xlarge button-rounded tright"><i
+                    class="icon-angle-right"></i><span>Browse Now</span></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-- Portfolio Filter
+                        ============================================= -->
+    <ul id="portfolio-filter" class="portfolio-filter clearfix" data-container="#portfolio">
+
+        <li class="activeFilter"><a href="#" data-filter="*">Show All</a></li>
+        {% for category in categories %}
+            <li><a href="#" data-filter=".pf-{{ category.slug }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul><!-- #portfolio-filter end -->
+
+
+    <div id="portfolio-shuffle" class="portfolio-shuffle" data-container="#portfolio">
+        <i class="icon-random"></i>
+    </div>
+
+    <div class="clear"></div>
+    <!-- Portfolio Items
+        ============================================= -->
+    <div id="portfolio" class="portfolio grid-container portfolio-6 clearfix">
+        {% include 'folioapps/projects/_partials/_list_projects.html' with projects=projects %}
+    </div><!-- #portfolio end -->
+{% endblock %}
