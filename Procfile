@@ -1,0 +1,1 @@
+web: gunicorn sleekfolio.wsgi --log-file -
