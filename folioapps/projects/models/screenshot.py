@@ -20,7 +20,7 @@ class Screenshot(models.Model):
     )
     image = models.ImageField(
         verbose_name=_('image'),
-        upload_to=upload_screenshots_to
+        upload_to=upload_screenshots_to,
     )
 
     def __str__(self):
