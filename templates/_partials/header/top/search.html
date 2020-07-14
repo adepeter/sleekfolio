@@ -4,7 +4,7 @@
         <i class="icon-line-cross"></i>
     </a>
     <form action="{% url 'sleekfolio:projects:project_search' %}" method="get">
-        <input type="text" name="q" class="form-control" value=""
+        <input type="text" name="q" class="form-control" value="{{ request.GET.q }}"
                placeholder="Type &amp; Hit Enter..">
     </form>
 </div>

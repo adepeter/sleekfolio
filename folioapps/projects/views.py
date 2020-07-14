@@ -1,3 +1,4 @@
+from django.contrib.postgres.search import SearchVector
 from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView
 
@@ -20,6 +21,7 @@ class ProjectDetail(DetailView):
 class ProjectSearch(ListView):
     model = Project
     context_object_name = 'projects'
+    paginate_by = 10
     template_name = f'{TEMPLATE_URL}/project_search.html'
 
     def get(self, request, *args, **kwargs):
@@ -28,5 +30,17 @@ class ProjectSearch(ListView):
             return redirect('sleekfolio:homepage')
         return super().get(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_keyword'] = self.search_keyword
+        return context
+
     def get_queryset(self):
-        return super().get_queryset()
+        qs = super().get_queryset()
+        results = qs.annotate(search=SearchVector(
+            'title',
+            'description',
+            'technologies',
+            'category__name',
+        )).filter(search=self.search_keyword)
+        return results
