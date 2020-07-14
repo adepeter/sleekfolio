@@ -26,7 +26,11 @@ SECRET_KEY = 'a17u-(_pi2pvk2%a$kjmm8p^o&%zk-kflcft+9*nqqy^ytq2_2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+    '127.0.0.1',
+    'sleekfolio.herokuapp.com'
+]
 
 # Application definition
 
@@ -85,10 +89,10 @@ WSGI_APPLICATION = 'sleekfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'foliodb',
-        'USER': 'foliouser',
-        'PASSWORD': 'foliopassword',
-        'HOST': 'localhost',
+        'NAME': os.environ.get('FOLIO_NAME'),
+        'USER': os.environ.get('FOLIO_USER'),
+        'PASSWORD': os.environ.get('FOLIO_PASSWORD'),
+        'HOST': os.environ.get('FOLIO_HOST'),
         'PORT': '5432',
     }
 }
