@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'sleekfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('FOLIO_NAME'),
-        'USER': os.environ.get('FOLIO_USER'),
-        'PASSWORD': os.environ.get('FOLIO_PASSWORD'),
-        'HOST': os.environ.get('FOLIO_HOST'),
+        'NAME': 'foliodb',
+        'USER': 'foliouser',
+        'PASSWORD': 'foliopassword',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -148,5 +148,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
+if os.environ.get('FOLIO_PRODUCTION', False) is True:
+    DATABASES['default'].update(prod_db)
 
