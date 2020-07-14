@@ -103,8 +103,6 @@ o
 ]
 -folioapps/projects/migrations/0001_initial.py,8\8\888b8c9e8bf1e655b0b75daf348dbc0a877a9a78
 h
-8folioapps/projects/migrations/0002_project_built_with.py,b\d\bd8098af6b36b9ca997e81276ee5f90e1ad3e337
-h
 8templates/folioapps/projects/_partials/_screenshots.html,4\3\43992b0770fcd5b78cbe0acb659b7d2f792cb517
 g
 7templates/folioapps/projects/_partials/_built_with.html,a\2\a238c0e16e345252ecdf13a3c2878a0f5a6e1723
@@ -120,3 +118,9 @@ J
 0templates/folioapps/projects/project_search.html,f\f\ff580be7d80c937fee9c6366084e5863f05b464b
 b
 2folioapps/categories/templatetags/category_tags.py,e\3\e3b1ad264adbe0f1c84091f3d756059edff85e7b
+8
+Procfile,b\c\bc3c68e880d1a01632bce79f69dd1387c7ba9c54
+;
+runtime.txt,2\e\2ed4029984f4a6c70a541992efb31f76528bd80d
+@
+requirements.txt,1\9\19359a61ae2446b51b549167b014da2fcf265768
