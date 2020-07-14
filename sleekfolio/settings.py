@@ -147,7 +147,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-prod_db  =  dj_database_url.config(conn_max_age=500)
+prod_db = dj_database_url.config(conn_max_age=500)
 if os.environ.get('FOLIO_PRODUCTION', False) is True:
     DATABASES['default'].update(prod_db)
 
