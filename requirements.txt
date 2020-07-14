@@ -6,3 +6,4 @@ dj-database-url
 whitenoise
 psycopg2
 django-heroku
+psycopg2-binary
