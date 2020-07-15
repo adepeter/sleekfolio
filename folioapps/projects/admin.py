@@ -27,7 +27,6 @@ class ProjectAdmin(admin.ModelAdmin):
         'category',
         'slug',
         'stack',
-        'description',
         'built_with',
         'technologies',
         'is_completed',
