@@ -35,14 +35,12 @@
         <div class="fancy-title title-bottom-border">
             <h2>Project Info:</h2>
         </div>
-        <p>{{ project.description | linebreaksbr }}</p>
+        <p>{{ project.description | markdown | linebreaksbr }}</p>
         <!-- Portfolio Single - Description End -->
         <div class="fancy-title title-bottom-border">
             <h2>Technologies:</h2>
         </div>
         {% include 'folioapps/projects/_partials/_built_with.html' with technologies=project.built_with %}
-
-        <div class="line"></div>
 
         <!-- Portfolio Single - Meta
         ============================================= -->
@@ -57,6 +55,14 @@
             <li><span><i class="icon-calendar3"></i>Completed on:</span> {{ project.date_completed }}</li>
         </ul>
         <!-- Portfolio Single - Meta End -->
+
+    <div class="fancy-title title-bottom-border">
+            <h2>Links:</h2>
+        </div>
+        <ul class="portfolio-meta bottommargin">
+            <li><span><i class="icon-globe"></i>Demo:</span> <a href="{{ project.demo_url }}" class="button button-border button-rounded button-aqua">Demo</a>
+            <li><span><i class="icon-repo"></i>Repo:</span> {{ project.repo_url | urlize }}</li>
+        </ul>
 
         <!-- Portfolio Single - Share
         ============================================= -->

@@ -1,5 +1,8 @@
+import markdown
+
 from django import template
 from django.db.models import Q
+from django.utils.safestring import mark_safe
 
 from ..models import Project
 
@@ -15,3 +18,8 @@ def related_projects(project, items=13):
         ~Q(id=project.id) &
         Q(technologies__contained_by=technologies_arr)).order_by('?')
     return {'projects': projects}
+
+
+@register.filter(name='markdown')
+def markdown_format(text):
+    return mark_safe(markdown.markdown(text))
