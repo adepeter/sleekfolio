@@ -50,15 +50,17 @@
             <h2>Important dates:</h2>
         </div>
         <ul class="portfolio-meta bottommargin">
-            <li><span><i class="icon-user"></i>Created by:</span> Aderibigbe Peter Oluwaseun</li>
+            <li><span><i class="icon-calendar3"></i>Started on:</span> {{ project.date_started }}</li>
+            <li><span><i class="icon-remove"></i>Completion status:</span>
+                {% if project.is_completed  %} Completed{% else %} In progress{% endif %}
+            </li>
             <li><span><i class="icon-calendar3"></i>Completed on:</span> {{ project.date_completed }}</li>
-            <li><span><i class="icon-link"></i>Client:</span> <a href="#">Google</a></li>
         </ul>
         <!-- Portfolio Single - Meta End -->
 
         <!-- Portfolio Single - Share
         ============================================= -->
-        {% include 'folioapps/projects/_partials/_social_media_share.html' %}
+        {# {% include 'folioapps/projects/_partials/_social_media_share.html' %} #}
         <!-- Portfolio Single - Share End -->
 
     </div><!-- .portfolio-single-content end -->
