@@ -20,14 +20,14 @@ class ScreenshotStackedInline(admin.TabularInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    readonly_fields = ['preview_image']
+    readonly_fields = ['preview_image', 'list_built_with']
     list_display = [
         'preview_image',
         'title',
         'category',
         'slug',
         'stack',
-        'built_with',
+        'list_built_with',
         'technologies',
         'is_completed',
         'date_started',
@@ -59,7 +59,7 @@ class ProjectAdmin(admin.ModelAdmin):
             'fields': [('title', 'slug')]
         }),
         (_('Project tech'), {
-            'fields': [('stack', 'technologies'), 'built_with']
+            'fields': [('stack', 'technologies'), 'list_built_with', 'built_with']
         }),
         (_('Project detail'), {
             'fields': ['description']
@@ -77,8 +77,13 @@ class ProjectAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_completed'
     inlines = [ScreenshotStackedInline]
 
+    def list_built_with(self, obj):
+        return ', '.join([built_with for built_with in obj.built_with])
+
     def preview_image(self, obj):
         image_url = obj.preview.url
-        return mark_safe(f'<img src="{image_url}" height="120" width="120" alt="{obj.title}"/>')
-
+        return mark_safe(
+            f'<img src="{image_url}" height="120" width="120" alt="{obj.title}"/>'
+        )
+    list_built_with.short_description = _('Built on')
     preview_image.short_description = _('Preview')
