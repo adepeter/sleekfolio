@@ -42,6 +42,8 @@
         </div>
         {% include 'folioapps/projects/_partials/_built_with.html' with technologies=project.built_with %}
 
+     <div class="line"></div>
+
         <!-- Portfolio Single - Meta
         ============================================= -->
         <div class="fancy-title title-bottom-border">
@@ -60,8 +62,16 @@
             <h2>Links:</h2>
         </div>
         <ul class="portfolio-meta bottommargin">
-            <li><span><i class="icon-globe"></i>Demo:</span> <a href="{{ project.demo_url }}" class="button button-border button-rounded button-aqua">Demo</a>
-            <li><span><i class="icon-repo"></i>Repo:</span> {{ project.repo_url | urlize }}</li>
+            <li>
+                <a href="{{ project.demo_url }}" class="button button-border button-rounded button-aqua">
+                    <i class="icon-globe"></i>Demo
+                </a>
+            </li>
+            <li>
+                <a href="{{ project.repo_url }}" class="button button-border button-rounded button-aqua">
+                    <i class="icon-github"></i>Source code
+                </a>
+            </li>
         </ul>
 
         <!-- Portfolio Single - Share
