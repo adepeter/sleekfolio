@@ -1,0 +1,41 @@
+{% load static %}
+{% load screenshot_tags %}
+
+{% for project in projects %}
+    <article class="portfolio-item pf-{{ project.category.slug }}">
+        <div class="portfolio-image">
+            {% with project.screenshots.all as project_shots %}
+                {% if project_shots|length > 1 %}
+                    <div class="fslider" data-arrows="false" data-speed="700" data-pause="7000">
+                        <div class="flexslider">
+                            <div class="slider-wrap">
+                                {% project_shots_by_count project 4 as screenshots_by_count %}
+                                {% for screenshot in screenshots_by_count %}
+                                    <div class="slide"><a href="{{ screenshot.project.get_absolute_url }}"><img
+                                            src="{{ screenshot.image.url }}" alt="{{ screenshot.project.title }}"></a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <img src="{{ project.preview.url }}" alt="{{ project.title }}">
+                {% endif %}
+            {% endwith %}
+            <div class="portfolio-overlay" data-lightbox="gallery">
+                <a href="{{ project.preview.url }}" class="left-icon" data-lightbox="gallery-item"><i
+                        class="icon-line-stack-2"></i></a>
+                <a href="{{ project.preview.url }}" class="hidden"
+                   data-lightbox="gallery-item"></a>
+                <a href="{{ project.get_absolute_url }}" class="right-icon"><i
+                        class="icon-line-ellipsis"></i></a>
+            </div>
+        </div>
+        <div class="portfolio-desc">
+            <h3><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+            <span>{{ project.technologies|join:", " }}</span>
+        </div>
+    </article>
+{% empty %}
+    <p>There are no projects yet</p>
+{% endfor %}

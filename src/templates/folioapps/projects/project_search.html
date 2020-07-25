@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load category_tags %}
+
+{% block title %}Search results for {{ search_query }}{% endblock %}
+
+{% block home_slider %}<!-- Page Title
+		============================================= -->
+    <section id="page-title">
+
+        <div class="container clearfix">
+            <h1>Search results for {{ search_keyword }}</h1>
+            <span>{{ paginator.count }} result{{ paginator.count|pluralize }} was found for {{ search_keyword }}</span>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'sleekfolio:homepage' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Project search</li>
+            </ol>
+        </div>
+
+    </section><!-- #page-title end -->{% endblock %}
+
+{% block content %}
+    <!-- Portfolio Filter
+                        ============================================= -->
+    <ul id="portfolio-filter" class="portfolio-filter clearfix" data-container="#portfolio">
+
+        <li class="activeFilter"><a href="#" data-filter="*">Show All</a></li>
+        {% get_all_categories projects as categories %}
+        {% for category in categories %}
+            <li>
+                <a href="#" data-filter=".pf-{{ category.slug }}">{{ category.name }}
+                    <span class="badge badge-info">({{ category.count_projects }})</span>
+                    <span class="sr-only">projects per category</span>
+                </a>
+            </li>
+        {% endfor %}
+
+
+    </ul><!-- #portfolio-filter end -->
+
+    <div id="portfolio-shuffle" class="portfolio-shuffle" data-container="#portfolio">
+        <i class="icon-random"></i>
+    </div>
+
+    <div class="clear"></div>
+
+    <!-- Portfolio Items
+					============================================= -->
+    <div id="portfolio" class="portfolio grid-container portfolio-1 clearfix">
+        {% for project in projects %}
+            <article class="portfolio-item pf-{{ project.category.slug }} clearfix">
+                <div class="portfolio-image">
+                    <a href="{{ project.get_absolute_url }}">
+                        <img src="{{ project.preview.url }}" alt="{{ project.title }}">
+                    </a>
+                    <div class="portfolio-overlay">
+                        <a href="{{ project.preview.url }}" class="left-icon" data-lightbox="image"><i
+                                class="icon-line-plus"></i></a>
+                        <a href="{{ project.get_absolute_url }}" class="right-icon"><i
+                                class="icon-line-ellipsis"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-desc">
+                    <h3><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+                    <span>{{ project.get_stack_display }}, {{ project.category.name }}</span>
+                    <p>{% if not project.description %}No description yet for this project{% endif %}{{ project.description|truncatewords:10 }}</p>
+                    <ul class="iconlist">
+                        <li><i class="icon-ok"></i> <strong>Created Using:</strong> {{ project.technologies|join:", " }}
+                        </li>
+                        <li><i class="icon-ok"></i> <strong>Started on:</strong> {{ project.date_started }}</li>
+                        <li><i class="icon-ok"></i> <strong>Completion status:</strong> {{ project.is_completed }}
+                        <li><i class="icon-ok"></i> <strong>Completed on:</strong> {{ project.date_completed }}</li>
+                        <li><i class="icon-ok"></i> <strong>By:</strong> Aderibigbe Peter Oluwaseun</li>
+                    </ul>
+                    <a href="{{ project.get_absolute_url }}" class="button button-3d noleftmargin">Launch Project</a>
+                </div>
+            </article>
+            {% empty %}
+            <p>There are no result for {{ search_keyword }}</p>
+        {% endfor %}
+    </div><!-- #portfolio end -->
+{% endblock %}

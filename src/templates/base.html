@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    {% include '_partials/header/metatags.html' %}
+    {% include '_partials/header/stylesheets.html' %}
+
+
+    <title>{% block title %}SleekFolio{% endblock %}</title>
+
+</head>
+
+<body class="stretched">
+
+<!-- Document Wrapper
+============================================= -->
+<div id="wrapper" class="clearfix">
+
+    <!-- Header
+    ============================================= -->
+    <header id="header" class="transparent-header floating-header">
+        {% include '_partials/header/top.html' %}
+    </header><!-- #header end -->
+{% block home_slider %}
+    <section id="slider" class="slider-element slider-parallax swiper_wrapper full-screen clearfix">
+        {% include '_partials/header/sliders.html' %}
+    </section>
+{% endblock %}
+
+    <!-- Content
+    ============================================= -->
+    <section id="content">
+
+        <div class="content-wrap">
+            {% block misc_nav %}{% endblock %}
+            <div class="container clearfix">
+                {% block content %}{% endblock %}
+            </div>
+
+        </div>
+
+    </section><!-- #content end -->
+
+    <!-- Footer
+    ============================================= -->
+    <footer id="footer" class="dark">
+        <!-- Copyrights
+        ============================================= -->
+        {% include '_partials/footer/copyright.html' %}
+
+    </footer><!-- #footer end -->
+
+</div><!-- #wrapper end -->
+
+<!-- Go To Top
+============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>
+
+<!-- External JavaScripts
+============================================= -->
+{% include '_partials/footer/footer_js.html' %}
+
+</body>
+</html>

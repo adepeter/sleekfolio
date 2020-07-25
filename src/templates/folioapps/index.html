@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Homepage | {{ block.super }}{% endblock %}
+
+
+{% block misc_nav %}
+    <div class="promo promo-full promo-border header-stick bottommargin-lg">
+        <div class="container clearfix">
+            <h3>Call me today at <span>+234.809.7799871</span> or Email me at <span>adepeter26@gmail.com.com</span>
+            </h3>
+            <span>Hardwork, best practices and efficiency are attributes of been unique. I work hard to ensure my works stand among the best</span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-- Portfolio Filter
+                        ============================================= -->
+    <ul id="portfolio-filter" class="portfolio-filter clearfix" data-container="#portfolio">
+
+        <li class="activeFilter"><a href="#" data-filter="*">Show All</a></li>
+        {% for category in categories %}
+            <li><a href="#" data-filter=".pf-{{ category.slug }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul><!-- #portfolio-filter end -->
+
+
+    <div id="portfolio-shuffle" class="portfolio-shuffle" data-container="#portfolio">
+        <i class="icon-random"></i>
+    </div>
+
+    <div class="clear"></div>
+    <!-- Portfolio Items
+        ============================================= -->
+    <div id="portfolio" class="portfolio grid-container portfolio-6 clearfix">
+        {% include 'folioapps/projects/_partials/_list_projects.html' with projects=projects %}
+    </div><!-- #portfolio end -->
+{% endblock %}

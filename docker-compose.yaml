@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  sleekfolio:
+    build:
+      context: .
+    environment:
+      - POSTGRES_HOST=localhost
+    restart: unless-stopped
+    env_file:
+      - ./configs/env/postgres.env
+      - ./configs/env/sleekfolio.env
+    volumes:
+    - /var/www/sleekfolio/backup:/var/lib/postgres/data
+    - ./configs/nginx/conf.d:/etc/nginx/conf.d
+    - ./src/static:/srv/ftp/sleekfolio/static:z
+    - ./src/media:/srv/ftp/sleekfolio/media:z
+    ports:
+    - "80:8000"

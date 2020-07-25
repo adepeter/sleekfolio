@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load project_tags %}
+
+{% block title %}{{ project.title }} | {{ block.super }}{% endblock %}
+
+{% block home_slider %}
+    <!-- Page Title
+============================================= -->
+    <section id="page-title">
+
+        <div class="container clearfix">
+            <h1>{{ project.title }}</h1>
+            <div id="portfolio-navigation">
+                <a href="#"><i class="icon-angle-left"></i></a>
+                <a href="#"><i class="icon-line-grid"></i></a>
+                <a href="#"><i class="icon-angle-right"></i></a>
+            </div>
+        </div>
+
+    </section><!-- #page-title end -->
+{% endblock %}
+
+{% block content %}
+    <!-- Portfolio Single Gallery
+                        ============================================= -->
+    {% include 'folioapps/projects/_partials/_screenshots.html' %}
+    <!-- .portfolio-single-image end -->
+
+    <!-- Portfolio Single Content
+    ============================================= -->
+    <div class="col_one_third portfolio-single-content col_last nobottommargin">
+
+        <!-- Portfolio Single - Description
+        ============================================= -->
+        <div class="fancy-title title-bottom-border">
+            <h2>Project Info:</h2>
+        </div>
+        <p>{{ project.description | markdown | linebreaksbr }}</p>
+        <!-- Portfolio Single - Description End -->
+        <div class="fancy-title title-bottom-border">
+            <h2>Technologies:</h2>
+        </div>
+        {% include 'folioapps/projects/_partials/_built_with.html' with technologies=project.built_with %}
+
+     <div class="line"></div>
+
+        <!-- Portfolio Single - Meta
+        ============================================= -->
+        <div class="fancy-title title-bottom-border">
+            <h2>Important dates:</h2>
+        </div>
+        <ul class="portfolio-meta bottommargin">
+            <li><span><i class="icon-calendar3"></i>Started on:</span> {{ project.date_started }}</li>
+            <li><span><i class="icon-thumbs-up"></i>Completion status:</span>
+                {% if project.is_completed  %} Completed{% else %} In progress{% endif %}
+            </li>
+            <li><span><i class="icon-calendar3"></i>Completed on:</span> {{ project.date_completed }}</li>
+        </ul>
+        <!-- Portfolio Single - Meta End -->
+
+    <div class="fancy-title title-bottom-border">
+            <h2>Links:</h2>
+        </div>
+        <ul class="portfolio-meta bottommargin">
+            <li>
+                <a href="{{ project.demo_url }}" class="button button-border button-rounded button-aqua">
+                    <i class="icon-globe"></i>Demo
+                </a>
+            </li>
+            <li>
+                <a href="{{ project.repo_url }}" class="button button-border button-rounded button-aqua">
+                    <i class="icon-github"></i>Source code
+                </a>
+            </li>
+        </ul>
+
+        <!-- Portfolio Single - Share
+        ============================================= -->
+        {# {% include 'folioapps/projects/_partials/_social_media_share.html' %} #}
+        <!-- Portfolio Single - Share End -->
+
+    </div><!-- .portfolio-single-content end -->
+
+    <div class="clear"></div>
+
+					<div class="divider divider-center"><i class="icon-circle"></i></div>
+
+    {# Related projects template tags below #}
+        {% related_projects project %}
+{% endblock %}

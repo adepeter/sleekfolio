@@ -1,0 +1,8 @@
+{% load static %}
+
+<div id="logo">
+    <a href="{% url 'sleekfolio:homepage' %}" class="standard-logo" data-dark-logo="{% static 'images/portfolio/logo.png' %}"><img
+            src="{% static 'images/portfolio/logo.png' %}" alt="Canvas Logo"></a>
+    <a href="{% url 'sleekfolio:homepage' %}" class="retina-logo" data-dark-logo="{% static 'images/portfolio/logo.png' %}"><img
+            src="{% static 'images/portfolio/logo.png' %}" alt="Canvas Logo"></a>
+</div>

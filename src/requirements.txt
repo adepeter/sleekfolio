@@ -1,0 +1,5 @@
+django
+django-mptt
+pillow
+uwsgi
+markdown

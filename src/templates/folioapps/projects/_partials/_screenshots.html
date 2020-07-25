@@ -1,0 +1,17 @@
+<div class="col_two_third portfolio-single-image nobottommargin">
+    <div class="fslider" data-arrows="false" data-thumbs="true" data-animation="fade">
+        <div class="flexslider">
+            <div class="slider-wrap">
+
+                <div class="slide" data-thumb="{{ project.preview.url }}"><a href="#"><img
+                        src="{{ project.preview.url }}" alt="{{ project.title }}"></a></div>
+                {% if project.screenshots %}
+                    {% for screenshot in project.screenshots.all %}
+                        <div class="slide" data-thumb="{{ screenshot.image.url }}"><a href="#"><img
+                                src="{{ screenshot.image.url }}" alt="{{ screenshot.project.title }}"></a></div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
